@@ -11,6 +11,7 @@ exclude_patterns: [_build, Thumbs.db, .DS_Store, "**.ipynb_checkpoints", conda, 
 # See https://jupyterbook.org/content/execute.html
 execute:
   execute_notebooks: force
+  cache: true
 
 # Define the name of the latex output file for PDF builds
 latex:
@@ -28,7 +29,7 @@ sphinx:
 
 # Information about where the book exists on the web
 repository:
-  url: https://github.com/quadriga-dk/Tabelle-Fallstudie-1  # Online location of your book
+  url: https://github.com/burningke/Tabelle-Fallstudie-2-folk  # Online location of your book
   branch: main  # Which branch of the repository should be used when creating links (optional)
 
 launch_buttons:
