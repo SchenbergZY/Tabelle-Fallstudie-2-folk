@@ -11,7 +11,7 @@ exclude_patterns: [_build, Thumbs.db, .DS_Store, "**.ipynb_checkpoints", conda, 
 # See https://jupyterbook.org/content/execute.html
 execute:
   execute_notebooks: force
-  cache: true
+#  cache: true
 
 # Define the name of the latex output file for PDF builds
 latex:
