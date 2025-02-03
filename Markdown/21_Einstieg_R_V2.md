@@ -28,11 +28,18 @@ Als Fallbeispiel wird eine CSV-Datei mit Rohdaten zum *Personalstand an Hochschu
 
 Damit Sie die in diesem Skript angeführten Befehle verwenden können,
 müssen Sie das folgende Package installieren und laden:
-```
+```{code-cell} R
 install.packages("tidyverse")
 library(tidyverse)
 ```
-
+```{code-cell} python
+import math
+print(math.pi)
+import numpy
+print(numpy.ones(1))
+import torch
+print(torch.tensor(1))
+```
 (Einlesen_csv)=
 ### Einlesen von CSV Dateien
 
