@@ -8,7 +8,7 @@ parts:
     chapters:
     - file: Markdown/02_Zielgruppen
     - file: Markdown/03_Datenbasis
-    - file: Markdown/04_Struktur_Fallstudie
+    # - file: Markdown/04_Struktur_Fallstudie
   - caption: 2. Datennachnutzung und FAIR-Prinzipien
     chapters:
     - file: Markdown/05_Datennachnutzung
