@@ -7,11 +7,12 @@ jupytext:
     format_name: myst
 kernelspec:
   display_name: R
-  language: R
   name: ir
 ---
 (Übung_csv)=
 # Übung: TESTYue Arbeiten mit CSV-Dateien in R
+
+# language: R
 
 ## Vorwort
 
