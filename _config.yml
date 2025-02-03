@@ -39,7 +39,7 @@ launch_buttons:
   binderhub_url: https://mybinder.org
   colab_url: https://colab.research.google.com
   repository_overrides:
-    url:  https://github.com/SchenbergZY/Tabelle-Fallstudie-1-folk
+    url:  https://github.com/burningke/Tabelle-Fallstudie-2-folk
     branch: main
     # forces an ipynb extension, irrespective of the actual one
     force_ipynb: true
