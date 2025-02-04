@@ -6,16 +6,16 @@ jupytext:
     extension: .md
     format_name: myst
 kernelspec:
-  display_name: Python 3
-  language: python
-  name: python3
+  language: R
+  display_name: R
+  name: ir
 ---
 (Übung_csv)=
 # Übung: TESTYue Arbeiten mit CSV-Dateien in R
 
-# language: R
-#  display_name: R
-#  name: ir
+#  display_name: Python 3
+#  language: python
+#  name: python3
 ## Vorwort
 
 Die folgende Lerneinheit soll Ihnen den Ersteinstieg in die Programmiersprache **R** erleichtern. Um der Übungseinheit effektiv folgen zu können, installieren Sie bitte **R** und **RStudio**. Hinweise zur Installation finden Sie [hier](https://quadriga-dk.github.io/Tabelle-Fallstudie-1/Markdown/28_Installation_R.html).  
@@ -35,21 +35,7 @@ müssen Sie das folgende Package installieren und laden:
 install.packages("tidyverse")
 library(tidyverse)
 ```
-## New
-```{code-cell} python
-a = 1
-```
-```{code-cell} python
-print(a)
-```
-```{code-cell} python
-import math
-print(math.pi)
-import numpy
-print(numpy.ones(1))
-import scipy
-print(scipy.__version__)
-```
+
 (Einlesen_csv)=
 ### Einlesen von CSV Dateien
 
