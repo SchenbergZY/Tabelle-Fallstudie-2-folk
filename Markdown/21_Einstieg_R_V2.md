@@ -31,7 +31,7 @@ Als Fallbeispiel wird eine CSV-Datei mit Rohdaten zum *Personalstand an Hochschu
 
 Damit Sie die in diesem Skript angeführten Befehle verwenden können,
 müssen Sie das folgende Package installieren und laden:
-```{code-cell} R
+``` # {code-cell} R
 install.packages("tidyverse")
 library(tidyverse)
 ```
