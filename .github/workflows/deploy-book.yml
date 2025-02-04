@@ -54,6 +54,10 @@ jobs:
     - name: Print all kernels again
       run: |
         jupyter kernelspec list
+        
+    - name: Install R_requirements
+      run: |
+        Rscript install_dependencies.R
 
     # (optional) Cache your executed notebooks between runs
     # if you have config:
