@@ -40,8 +40,8 @@ import math
 print(math.pi)
 import numpy
 print(numpy.ones(1))
-import pydirectinput
-print(pydirectinput.__version__)
+import scipy
+print(scipy.__version__)
 ```
 (Einlesen_csv)=
 ### Einlesen von CSV Dateien
