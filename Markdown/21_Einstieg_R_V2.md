@@ -36,6 +36,12 @@ install.packages("tidyverse")
 library(tidyverse)
 ```
 ```{code-cell} python
+a = 1
+```
+```{code-cell} python
+print(a)
+```
+```{code-cell} python
 import math
 print(math.pi)
 import numpy
