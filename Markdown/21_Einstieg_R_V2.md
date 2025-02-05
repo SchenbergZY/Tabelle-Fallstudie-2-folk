@@ -20,11 +20,11 @@ Als Fallbeispiel wird eine CSV-Datei mit Rohdaten zum *Personalstand an Hochschu
 
 # ````{admonition} Daten Unterladen: 
 # :class: hinweis, dropdown
-````{toggle}
+
 ```{code-cell} R
+:tags: ["hide-input"]
 download.file("https://burningke.github.io/Tabelle-Fallstudie-2-folk/_downloads/58585ac92b14d1ff9f647e0ab796297f/21341-0001_F_2020.csv", "21341-0001_F_2020.csv")
 ```
-````
 
 ------------------------------------------------------------------------
 
