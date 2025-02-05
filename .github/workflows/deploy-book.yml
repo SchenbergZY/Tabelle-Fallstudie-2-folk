@@ -58,7 +58,13 @@ jobs:
     - name: Install R_requirements
       run: |
         Rscript install_dependencies.R
+    # - name: Install R_requirements
+    #   uses: r-lib/actions/setup-pandoc@v2
+    #  with:
+    #    pandoc-version: '3.1.11' # The pandoc version to download (if necessary) and use.
+    # - run: echo "# Test" | pandoc -t html
 
+    
     # (optional) Cache your executed notebooks between runs
     # if you have config:
     # execute:
