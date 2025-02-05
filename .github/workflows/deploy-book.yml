@@ -66,9 +66,9 @@ jobs:
       run: |
         jupyter kernelspec list
         
-    - name: Install R_requirements
-      run: |
-        Rscript install_dependencies.R
+    #- name: Install R_requirements
+    #  run: |
+    #    Rscript install_dependencies.R
     # - name: Install R_requirements
     #   uses: r-lib/actions/setup-pandoc@v2
     #  with:
