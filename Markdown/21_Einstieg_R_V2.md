@@ -18,9 +18,49 @@ kernelspec:
 Die folgende Lerneinheit soll Ihnen den Ersteinstieg in die Programmiersprache **R** erleichtern. Um der Übungseinheit effektiv folgen zu können, installieren Sie bitte **R** und **RStudio**. Hinweise zur Installation finden Sie [hier](https://quadriga-dk.github.io/Tabelle-Fallstudie-1/Markdown/28_Installation_R.html).  
 Als Fallbeispiel wird eine CSV-Datei mit Rohdaten zum *Personalstand an Hochschulen* eingelesen und ausgewertet. Entweder haben Sie diese Datei schon in [Kapitel 3](https://quadriga-dk.github.io/Tabelle-Fallstudie-1/Markdown/11_XLSXundCSV.html) heruntergeladen oder Sie klicken [hier](Data/21341-0001_F_2020.csv) um die CSV-Datei aus unserem Repositorium direkt herunterzuladen (Quelle: Statistisches Bundesamt 2022).  
 
-# ````{admonition} Daten Unterladen: 
-# :class: hinweis, dropdown
+## In Englisch:
+You can use the data.europa.eu/sparql to search for the dataset:
+```{code-cell} R
+IRdisplay::display_html('<iframe 
+  src="https://data.europa.eu/sparql"
+  width="100%"
+  height="500px"
+>')
+```
+Examaple code is shown below for the link query:
+```
+Default Data Set Name: http://data.europa.eu/88u/dataset/30303032-3133-4034-312d-303030310000
+Query Text:
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX adms: <http://www.w3.org/ns/adms#>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX locn: <http://www.w3.org/ns/locn#>
+PREFIX j0: <http://www.w3.org/2011/content#>
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 
+SELECT DISTINCT ?csvURL 
+WHERE {
+    ?dataset a dcat:Dataset .
+    ?dataset dcat:distribution ?distribution .
+    ?distribution dcat:accessURL ?csvURL .
+    
+    FILTER (STRENDS(STR(?csvURL), ".csv"))
+}
+```
+
+You can copy the result link and replace the content in the following code inside quotation mark:
+```{code-cell} R
+csv_url <- "https://www-genesis.destatis.de/genesis/downloads/00/tables/21341-0001_00.csv"
+file_name <- basename(csv_url)
+download.file(csv_url, destfile = file_name, mode = 'wb')
+```
+
+### HOWEVER, the data cannot downloaded via the sparql result as the link is not valid anymore, you have to use the following:
 ```{code-cell} R
 :tags: ["hide-input"]
 download.file("https://burningke.github.io/Tabelle-Fallstudie-2-folk/_downloads/58585ac92b14d1ff9f647e0ab796297f/21341-0001_F_2020.csv", "21341-0001_F_2020.csv")
