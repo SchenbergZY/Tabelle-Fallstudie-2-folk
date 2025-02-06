@@ -21,22 +21,14 @@ Als Fallbeispiel wird eine CSV-Datei mit Rohdaten zum *Personalstand an Hochschu
 ## In Englisch:
 You can use the data.europa.eu/sparql to search for the dataset:
 ```{code-cell} R
-#IRdisplay::display_html('<iframe 
-#  src="" #https://data.europa.eu/sparql
-#  width="100%"
-#  height="500px"
-#>')
-```
-
-```{raw-cell}
-:format: text/html
-
-<iframe 
+IRdisplay::display_html('<iframe 
   src="" #https://data.europa.eu/sparql
   width="100%"
   height="500px"
->
+  >
+  </iframe>')
 ```
+
 
 Examaple code is shown below for the link query:
 ```
