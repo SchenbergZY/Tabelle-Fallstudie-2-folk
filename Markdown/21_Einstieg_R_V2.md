@@ -25,7 +25,17 @@ You can use the data.europa.eu/sparql to search for the dataset:
 #  src="" #https://data.europa.eu/sparql
 #  width="100%"
 #  height="500px"
->')
+#>')
+```
+
+```{raw-cell}
+:format: text/html
+
+<iframe 
+  src="" #https://data.europa.eu/sparql
+  width="100%"
+  height="500px"
+>
 ```
 
 Examaple code is shown below for the link query:
