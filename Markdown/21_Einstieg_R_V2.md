@@ -100,7 +100,7 @@ Hierfür gibt es zwei Befehle: `read.csv()` oder `read.csv2()`
 
 **Fallbeispiel:**
 
-```
+```{code-cell} R
 #Daten einlesen
 data_csv <- read.csv2("21341-0001_F_2020.csv",header = FALSE)
 ```
@@ -168,7 +168,7 @@ Wenn Sie die Bedeutung und Syntax eines Befehls besser verstehen wollen, empfiel
 
 Es ist immer ratsam, einen ersten Blick auf die Daten zu werfen, um
 deren Struktur zu verstehen. Dazu verwenden Sie folgenden Befehl:  
-```
+```{code-cell} R
 show(data_csv)
 ```
 
