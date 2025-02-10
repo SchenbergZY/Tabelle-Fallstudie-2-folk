@@ -159,7 +159,7 @@ Wenn Sie die Bedeutung und Syntax eines Befehls besser verstehen wollen, empfiel
 `````
 
 *Beispiel:*  
-```
+```{code-cell} R
 ?read.csv2
 ```
 ------------------------------------------------------------------------
