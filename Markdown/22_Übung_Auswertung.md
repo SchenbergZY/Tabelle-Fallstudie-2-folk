@@ -39,6 +39,45 @@ row.names(Tabellendaten) <- 1:78
 head(Tabellendaten) 
 ```
 ````
+In Englisch:
+Data Download:
+```{code-cell} R
+:tags: ["hide-input"]
+download.file("https://burningke.github.io/Tabelle-Fallstudie-2-folk/_downloads/58585ac92b14d1ff9f647e0ab796297f/21341-0001_F_2020.csv", "21341-0001_F_2020.csv")
+```
+
+```{code-cell} R
+:tags: ["hide-input"]
+#TidyVerse Package Installation
+install.packages("tidyverse")
+library(tidyverse)
+
+#Daten einlesen
+data_csv_clean <- read.csv2("21341-0001_F_2020.csv", header = FALSE, encoding = "latin1")
+
+#Ergebnisse ansehen
+head(data_csv_clean)
+
+#Umlaute entfernen
+data_csv_clean$V1 <- str_replace_all(data_csv_clean$V1, c("ä" = "ae", "ö" = "oe", "ü" ="ue", "ß" ="ss"))
+data_csv_clean$V2 <- str_replace_all(data_csv_clean$V2, c("ä" = "ae", "ö" = "oe", "ü" ="ue", "ß" ="ss"))
+
+#Ausgewählte Ergebnisse ansehen
+show(data_csv_clean[8:20,1:3])
+
+#Tabelle unterteilen
+Metadaten <- data_csv_clean[c(1:6, 87:88), 1]
+Tabellendaten <- data_csv_clean[8:85, 1:3]
+
+#Spaltenüberschriften setzen
+colnames(Tabellendaten) <- c("Angestelltenverhaeltnis", "Geschlecht", "Angestelltenzahl_2020")
+
+#Nummerierung neu setzen
+row.names(Tabellendaten) <- 1:78
+
+#Ergebnis ansehen
+head(Tabellendaten) 
+```
 
 ## Variablenklassen bestimmen 
 
