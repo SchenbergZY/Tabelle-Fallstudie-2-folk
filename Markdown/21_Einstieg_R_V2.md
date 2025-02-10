@@ -354,14 +354,14 @@ Sie können die Datei als ISO 8859-1 (“Latin-1”) kodiert laden. Hierzu
 müssen Sie zum bekannten Einlesebefehl nur den Zusatz
 `encoding = "latin1"` hinzufügen, damit **R** weiß, welche
 Zeichenkodierung im Dokument verwendet wurde:
-```
+```{code-cell} R
 data_csv_clean <- read.csv2("21341-0001_F_2020.csv", header = FALSE, encoding = "latin1")
 ```
 
 Wenn Sie schnell überprüfen möchten, ob die Umlaute nun korrekt
 angezeigt werden, können Sie den Befehl `head()` benutzen. Hierdurch
 werden nur die ersten Zeilen Ihrer Tabelle angezeigt.
-```
+```{code-cell} R
 head(data_csv_clean)
 ```
 ```
@@ -393,7 +393,7 @@ Mittels des Befehls `str_replace_all` können Sie einzelne Buchstaben in
 Ihrer Tabelle ersetzen. Dies ist jedoch nur separat für einzelne Spalten
 möglich.
 
-```
+```{code-cell} R
 data_csv_clean$V1 <- str_replace_all(data_csv_clean$V1, c("ä" = "ae", "ö" = "oe", "ü" ="ue", "ß" ="ss"))
 data_csv_clean$V2 <- str_replace_all(data_csv_clean$V2, c("ä" = "ae", "ö" = "oe", "ü" ="ue", "ß" ="ss"))
 ```
@@ -434,14 +434,14 @@ inkludiert alle dazwischenliegenden Werte (“von… bis…”). Ein Komma
 separiert Bereiche.  
   
 **Allgemeines Beispiel:**
-```
+```{code-cell} R
 1:5
 ```
 ```
 ## [1] 1 2 3 4 5
 ```
 Ein Vektor mit Wertebereichen:
-```
+```{code-cell} R
 c(1:5, 11:15)
 ```
 ```
@@ -450,7 +450,7 @@ c(1:5, 11:15)
   
 
 **Angewendet auf die vorliegende CSV-Tabelle:**
-```
+```{code-cell} R
 show(data_csv_clean[8:20,1:3])
 ```
 ```
@@ -476,7 +476,7 @@ Wie Sie erkennen können, wurden die Umlaute erfolgreich umgeschrieben.
 
 Damit die Tabelle eine bessere Struktur erlangt, empfiehlt sich eine
 Separierung in Metadaten und Tabellendaten.  
-```
+```{code-cell} R
 Metadaten <- data_csv_clean[c(1:6, 87:88), 1]
 Tabellendaten <- data_csv_clean[8:85, 1:3]
 ```
@@ -487,15 +487,15 @@ setzen.
 
 Sie können dies entweder für jede Spalte mit einem einzelnen Befehl
 durchführen:
-```
+```{code-cell} R
 colnames(Tabellendaten)[1] <- "Angestelltenverhaeltnis"
 ```
 Oder alle Spaltenüberschriften mittels eines Vektors gleichzeitig neu
 setzen:
-```
+```{code-cell} R
 colnames(Tabellendaten) <- c("Angestelltenverhaeltnis", "Geschlecht", "Angestelltenzahl_2020")
 ```
-```
+```{code-cell} R
 #Ergebnis ansehen
 head(Tabellendaten) 
 ```
@@ -512,7 +512,7 @@ head(Tabellendaten)
 Damit die Nummerierung der Tabellenzeilen nicht bei der Zahl 8 startet,
 empfiehlt sich die Nummerierung der Zeilen neu zu setzen. Herzu kann der
 Befehl `row.names` eingesetzt werden:
-```
+```{code-cell} R
 row.names(Tabellendaten) <- 1:78
 ```
   
