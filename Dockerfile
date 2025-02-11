@@ -38,7 +38,7 @@ USER ${NB_UID}
 # R packages including IRKernel which gets installed globally.
 # r-e1071: dependency of the caret R package
 
-
+# RUN mkdir -p "/home/${NB_UID}/notebook"
 
 RUN mamba install --quiet --yes \
     'r-base' \
@@ -58,7 +58,7 @@ RUN mamba install --quiet --yes \
     'r-rodbc' \
     'r-rsqlite' \
     'r-shiny' \
-    #'r-tidyverse' \
+    'r-tidyverse' \
     #'r-bit' \
     #'r-bit64' \
     #'r-googledrive' \
@@ -69,7 +69,8 @@ RUN mamba install --quiet --yes \
     'jupytext' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
+    fix-permissions "/home/${NB_USER}" && \
+    fix-permissions "/home/${NB_USER}/notebook/.ipynb_checkpoints" 
 
 # `rpy2` and `r-tidymodels` are not easy to install under aarch64
 # RUN set -x && \
