@@ -38,7 +38,7 @@ USER ${NB_UID}
 # R packages including IRKernel which gets installed globally.
 # r-e1071: dependency of the caret R package
 
-# RUN mkdir -p "/home/${NB_UID}/notebook"
+RUN mkdir -p "/home/${NB_UID}/notebook"
 
 RUN mamba install --quiet --yes \
     'r-base' \
