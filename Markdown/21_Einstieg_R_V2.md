@@ -68,7 +68,7 @@ download.file(csv_url, destfile = file_name, mode = 'wb')
 ### HOWEVER, the data cannot downloaded via the sparql result as the link is not valid anymore, you have to use the following:
 ```{code-cell} R
 :tags: ["hide-input"]
-download.file("https://burningke.github.io/Tabelle-Fallstudie-2-folk/_downloads/58585ac92b14d1ff9f647e0ab796297f/21341-0001_F_2020.csv", "21341-0001_F_2020.csv")
+download.file("https://github.com/SchenbergZY/Tabelle-Fallstudie-2-folk/raw/refs/heads/main/Markdown/Data/21341-0001_F_2020.csv", "21341-0001_F_2020.csv")
 ```
 
 ------------------------------------------------------------------------
