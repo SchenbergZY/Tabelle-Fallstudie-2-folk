@@ -32,13 +32,12 @@ RUN apt-get update --yes && \
     gcc && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
+RUN mkdir -p "/home/${NB_UID}/notebook/.ipynb_checkpoints"
 
 USER ${NB_UID}
 
 # R packages including IRKernel which gets installed globally.
 # r-e1071: dependency of the caret R package
-
-RUN mkdir -p "/home/${NB_UID}/notebook"
 
 RUN mamba install --quiet --yes \
     'r-base' \
