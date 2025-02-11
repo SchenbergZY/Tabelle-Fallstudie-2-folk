@@ -32,7 +32,7 @@ RUN apt-get update --yes && \
     gcc && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p "/home/${NB_UID}/notebook/.ipynb_checkpoints"
+# RUN mkdir -p "/home/${NB_UID}/notebook/.ipynb_checkpoints"
 
 USER ${NB_UID}
 
@@ -68,8 +68,9 @@ RUN mamba install --quiet --yes \
     'jupytext' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}" && \
-    fix-permissions "/home/${NB_USER}/notebook/.ipynb_checkpoints" 
+    fix-permissions "/home/${NB_USER}" 
+#    && \
+#    fix-permissions "/home/${NB_USER}/notebook/.ipynb_checkpoints" 
 
 # `rpy2` and `r-tidymodels` are not easy to install under aarch64
 # RUN set -x && \
