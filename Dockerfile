@@ -64,7 +64,9 @@ RUN mamba install --quiet --yes \
     #'r-googledrive' \
     #'r-googlesheets4' \
     # 'tensorflow' \
-    'unixodbc' && \
+    'unixodbc' \
+    'nbgitpuller' \
+    'jupytext' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
@@ -93,7 +95,7 @@ RUN chown -R ${NB_USER} ${HOME}
 #RUN chown -R ${NB_USER} /opt/conda
 USER ${NB_UID}
 # RUN pip install -r requirements.txt
-RUN pip install --quiet --yes \
-    'nbgitpuller==1.2.*' \
-    'jupytext==1.16.*'
+# RUN pip install --quiet --yes \
+#     'nbgitpuller==1.2.*' \
+#     'jupytext==1.16.*'
 # WORKDIR "${HOME}"
