@@ -1,5 +1,17 @@
+---
+jupytext:
+  cell_metadata_filter: -all
+  formats: md:myst
+  text_representation:
+    extension: .md
+    format_name: myst
+kernelspec:
+  language: R
+  display_name: R
+  name: ir
+---
 (Übung_Auswertung)=
-# Übung: Auswerten von CSV-Dateien in R
+# ÜbungYue: Auswerten von CSV-Dateien in R
 
 ## Vorwort
 
