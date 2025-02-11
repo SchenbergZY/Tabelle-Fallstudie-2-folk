@@ -55,7 +55,7 @@ In Englisch:
 Data Download:
 ```{code-cell} R
 :tags: ["hide-input"]
-download.file("https://burningke.github.io/Tabelle-Fallstudie-2-folk/_downloads/58585ac92b14d1ff9f647e0ab796297f/21341-0001_F_2020.csv", "21341-0001_F_2020.csv")
+download.file("https://github.com/SchenbergZY/Tabelle-Fallstudie-2-folk/raw/refs/heads/main/Markdown/Data/21341-0001_F_2020.csv", "21341-0001_F_2020.csv")
 ```
 
 ```{code-cell} R
