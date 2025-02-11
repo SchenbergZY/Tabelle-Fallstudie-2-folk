@@ -93,4 +93,7 @@ RUN chown -R ${NB_USER} ${HOME}
 #RUN chown -R ${NB_USER} /opt/conda
 USER ${NB_UID}
 # RUN pip install -r requirements.txt
+RUN pip install --quiet --yes \
+    'nbgitpuller==1.2.*' \
+    'jupytext==1.16.*'
 # WORKDIR "${HOME}"
