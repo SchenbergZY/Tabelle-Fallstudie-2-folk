@@ -22,9 +22,9 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     # Install ubuntu deps
-    #- name: Install ubuntu deps
-    #  run: |
-    #    sudo apt-get install -y --no-install-recommends libcurl4-openssl-dev # \
+    - name: Install ubuntu deps
+      run: |
+        sudo apt-get install -y --no-install-recommends libcurl4-openssl-dev # \
     #    # git-core \
     #    # libssl-dev \
     #    # libcurl4-openssl-dev 
