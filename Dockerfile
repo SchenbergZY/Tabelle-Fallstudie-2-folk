@@ -91,6 +91,8 @@ COPY . ${HOME}
 RUN chown -R ${NB_USER} ${HOME}
 #RUN chown -R ${NB_USER} /opt/conda
 USER ${NB_UID}
-RUN jupyter server --generate-config
+# RUN jupyter server --generate-config
+RUN wget https://raw.githubusercontent.com/SchenbergZY/jupyterhub_python_r/refs/heads/main/jupyter_server_config.py
+COPY  jupyter_server_config.py "/home/${NB_USER}/.jupyter/"
 # RUN pip install -r requirements.txt
 # WORKDIR "${HOME}"
