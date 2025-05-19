@@ -93,6 +93,7 @@ RUN chown -R ${NB_USER} ${HOME}
 USER ${NB_UID}
 # RUN jupyter server --generate-config
 RUN wget -P "/home/${NB_USER}" https://raw.githubusercontent.com/SchenbergZY/jupyterhub_python_r/refs/heads/main/jupyter_server_config.py
+RUN ls -l "/home/${NB_USER}"
 COPY  "/home/${NB_USER}/jupyter_server_config.py" "/home/${NB_USER}/.jupyter/"
 # RUN pip install -r requirements.txt
 # WORKDIR "${HOME}"
