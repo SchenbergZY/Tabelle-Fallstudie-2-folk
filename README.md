@@ -1,5 +1,5 @@
 # QUADRIGA OER 
-[![DOI](https://zenodo.org/badge/814613042.svg)](https://doi.org/10.5281/zenodo.14975202)
+[![DOI](https://zenodo.org/badge/814613042.svg)](https://doi.org/10.5281/zenodo.14975202)<a href="https://deepwiki.com/SchenbergZY/Tabelle-Fallstudie-2-folk"><img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki"></a>
 
 <div align="center">
 <p align="center">
