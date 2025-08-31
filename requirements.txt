@@ -1,5 +1,5 @@
 jupyter-book==1.0.4
 jupyterquiz==2.8.*
+runestone>=7.1
 matplotlib
 numpy
-#ipywidgets
