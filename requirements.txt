@@ -1,5 +1,5 @@
-jupyter-book==1.0.3
+jupyter-book==1.0.4
 jupyterquiz==2.8.*
-runestone==7.9.8
+# runestone==7.9.8
 matplotlib
 numpy
