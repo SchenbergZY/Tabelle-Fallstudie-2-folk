@@ -34,18 +34,63 @@ Viel Erfolg!
 
 ```{raw} html
 <style>
-.dnd-item{padding:.3em .6em;margin:.2em;border:1px solid #aaa;
-          background:#fafafa;cursor:move;display:inline-block}
-.dnd-box{min-height:2.4em;min-width:7em;margin:.2em .4em;
-         border:2px dashed #aaa;display:inline-block}
-.dnd-box.ok{border-color:#0a0}
-#choices{border:2px dashed #aaa;padding:.3em .4em}
+:root{
+  --primary:   #4f46e5;   /* indigo-600  */
+  --primaryLt: #eef2ff;   /* indigo-50   */
+  --gray:      #9ca3af;   /* gray-400    */
+  --good:      #16a34a;   /* green-600   */
+}
+
+/* draggable tiles (“chips”) */
+.dnd-item{
+  background: var(--primaryLt);
+  border: 1px solid var(--primary);
+  border-radius: 0.5rem;
+  padding: 0.35rem 0.75rem;
+  margin: 0.25rem;
+  font-weight: 500;
+  box-shadow: 0 1px 2px rgba(0,0,0,.06);
+  cursor: move;
+  transition: transform .15s, box-shadow .15s;
+}
+.dnd-item:active{              /* makes the tile ‘shrink’ while dragging */
+  transform: scale(.95);
+  box-shadow: 0 4px 6px rgba(0,0,0,.15);
+}
+
+/* containers */
+.dnd-box{
+  min-height: 3rem; min-width: 8rem;
+  padding: 0.5rem 0.6rem;
+  margin: 0.4rem 0.6rem 1rem 0;
+  border: 2px dashed var(--gray);
+  border-radius: 0.75rem;
+  display: inline-flex; flex-wrap: wrap; gap: .4rem; align-items: center;
+  transition: border-color .2s, background .2s;
+}
+.dnd-box.dragover{             /* while user hovers with a tile */
+  background: #fefce8;         /* yellow-50 */
+  border-color: var(--primary);
+}
+.dnd-box.ok{                   /* after correct answer */
+  background: #f0fdf4;         /* green-50 */
+  border-color: var(--good);
+}
+
+/* buttons */
+.dnd-btn{
+  background: var(--primary); color:#fff;
+  border:0; border-radius:.5rem;
+  padding:.45rem 1.1rem; margin-right:.5rem;
+  font-weight:500; cursor:pointer;
+  transition: background .2s;
+}
+.dnd-btn:hover{ background:#4338ca }       /* indigo-700 */
 </style>
 
-<p>Drag the <strong>prime numbers</strong> into the box.<br>
-(You can drag them back out again.)</p>
+<p>Drag the <strong>prime numbers</strong> into the target box.<br>
+(You can drag them back out or press <em>Reset</em>.)</p>
 
-<!-- DRAG SOURCE  ------------------------------------------------------->
 <div id="choices" class="dnd-box">
   <span class="dnd-item" draggable="true" data-key="2">2</span>
   <span class="dnd-item" draggable="true" data-key="4">4</span>
@@ -53,44 +98,46 @@ Viel Erfolg!
   <span class="dnd-item" draggable="true" data-key="9">9</span>
 </div>
 
-<!-- DROP TARGET  ------------------------------------------------------->
 <div id="target" class="dnd-box" data-answer="2,5"></div>
-<button onclick="checkDND()">Check me</button>
-<button onclick="resetDND()">Reset</button>
+
+<button class="dnd-btn" onclick="checkDND()">Check me</button>
+<button class="dnd-btn" onclick="resetDND()">Reset</button>
 
 <script>
-let dragElem = null;
+let dragElem=null;
 
-/* ---------- make every .dnd-item draggable -------------------------- */
-document.querySelectorAll('.dnd-item').forEach(el =>
-  el.addEventListener('dragstart', e => dragElem = el)
+/* make every chip draggable */
+document.querySelectorAll('.dnd-item').forEach(el=>
+  el.addEventListener('dragstart',   e=>dragElem=el)
 );
 
-/* ---------- allow drops on BOTH containers ------------------------- */
-['choices','target'].forEach(id => {
-  const area = document.getElementById(id);
-  area.addEventListener('dragover',  e => e.preventDefault());
-  area.addEventListener('drop',      e => { e.preventDefault(); area.appendChild(dragElem); });
-});
-
-/* ---------- grading ------------------------------------------------- */
-function checkDND(){
-  const picked = [...document.querySelectorAll('#target .dnd-item')]
-                  .map(x => x.dataset.key).sort().join();
-  const good   = document.getElementById('target').dataset.answer.split(',').sort().join();
-  if (picked === good){
-      alert('✅ Correct!');
-      document.getElementById('target').classList.add('ok');
-  } else {
-      alert('❌ Try again');
-      document.getElementById('target').classList.remove('ok');
-  }
+/* helper to add “dragover” highlight */
+function makeDroppable(box){
+  box.addEventListener('dragover',e=>{
+      e.preventDefault(); box.classList.add('dragover');
+  });
+  box.addEventListener('dragleave',e=>{
+      box.classList.remove('dragover');
+  });
+  box.addEventListener('drop',e=>{
+      e.preventDefault(); box.classList.remove('dragover');
+      box.appendChild(dragElem);
+  });
 }
+['choices','target'].forEach(id=>makeDroppable(document.getElementById(id)));
 
-/* ---------- reset --------------------------------------------------- */
+function checkDND(){
+  const picked=[...document.querySelectorAll('#target .dnd-item')]
+               .map(x=>x.dataset.key).sort().join();
+  const good  =document.getElementById('target')
+               .dataset.answer.split(',').sort().join();
+  const tgt=document.getElementById('target');
+  if(picked===good){ alert('✅ Correct!'); tgt.classList.add('ok'); }
+  else             { alert('❌ Try again'); tgt.classList.remove('ok'); }
+}
 function resetDND(){
   document.getElementById('target').querySelectorAll('.dnd-item')
-    .forEach(el => document.getElementById('choices').appendChild(el));
+          .forEach(el=>document.getElementById('choices').appendChild(el));
   document.getElementById('target').classList.remove('ok');
 }
 </script>
