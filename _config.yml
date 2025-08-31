@@ -59,6 +59,9 @@ html:
   use_multitoc_numbering: false
 
 sphinx:
+  extra_extensions:
+    # loads *all* Runestone components, including dragndrop
+    - runestone
   config:
     bibtex_reference_style: author_year
     html_show_copyright: false
@@ -68,3 +71,5 @@ sphinx:
       - carousel.css
     html_js_files:
       - carousel.js
+    # optional – keeps Runestone quiet about a missing back-end server
+    runestone_server_url: ""      # empty = no grade reporting
