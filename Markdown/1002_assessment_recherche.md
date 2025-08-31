@@ -30,6 +30,17 @@ Es erfolgt keine Bewertung oder Speicherung Ihrer Ergebnisse. Nutzen Sie dieses 
 Viel Erfolg!
 ````
 
+### Aufgabe 0
+
+```{dragndrop} match_years
+:feedback: Close, but check the 19ᵗʰ-century dates again 😉
+:match_1: Monroe Doctrine|||1823
+:match_2: Haymarket Riot|||1886
+:match_3: Louisiana Purchase|||1803
+:match_4: Battle of Gettysburg|||1863
+```
+Match each event with the year it happened.
+
 ### Aufgabe 1
 
 **Szenario:** Sie möchten eine eigene Fallstudie zu studentischen Animationsfilmen der 1990er Jahre durchführen. Beschreiben Sie systematisch Ihr Vorgehen bei der Materialrecherche im OPAC der Filmuniversität.
