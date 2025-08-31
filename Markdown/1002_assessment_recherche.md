@@ -30,16 +30,47 @@ Es erfolgt keine Bewertung oder Speicherung Ihrer Ergebnisse. Nutzen Sie dieses 
 Viel Erfolg!
 ````
 
-### Aufgabe 0
+### Aufgabe 0: Test html
 
-```{dragndrop} match_years
-:feedback: Close, but check the 19ᵗʰ-century dates again 😉
-:match_1: Monroe Doctrine|||1823
-:match_2: Haymarket Riot|||1886
-:match_3: Louisiana Purchase|||1803
-:match_4: Battle of Gettysburg|||1863
+```{raw} html
+<style>
+.dnd-item{padding:.3em .6em;margin:.2em;border:1px solid #aaa;
+          background:#fafafa;cursor:move;display:inline-block}
+.dnd-box{min-height:2.4em;min-width:7em;margin:.2em .4em;
+         border:2px dashed #aaa;display:inline-block}
+.dnd-box.ok{border-color:#0a0}
+</style>
+
+<p>Drag the <strong>prime numbers</strong> into the box:</p>
+
+<div id="choices">
+  <span class="dnd-item" draggable="true" data-key="2">2</span>
+  <span class="dnd-item" draggable="true" data-key="4">4</span>
+  <span class="dnd-item" draggable="true" data-key="5">5</span>
+  <span class="dnd-item" draggable="true" data-key="9">9</span>
+</div>
+
+<div id="target" class="dnd-box" data-answer="2,5"></div>
+<button onclick="checkDND()">Check me</button>
+
+<script>
+let drag;
+document.querySelectorAll('.dnd-item').forEach(el=>{
+  el.addEventListener('dragstart',e=>drag=el);
+});
+const box=document.getElementById('target');
+box.addEventListener('dragover',e=>e.preventDefault());
+box.addEventListener('drop',e=>{e.preventDefault(); box.appendChild(drag);});
+function checkDND(){
+  const picked=[...box.querySelectorAll('.dnd-item')]
+               .map(x=>x.dataset.key).sort().join();
+  const good  =box.dataset.answer.split(',').sort().join();
+  if(picked===good){alert('✅ Correct!');box.classList.add('ok');}
+  else             {alert('❌ Try again');box.classList.remove('ok');}
+}
+</script>
 ```
-Match each event with the year it happened.
+
 
 ### Aufgabe 1
 
