@@ -27,6 +27,7 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
+        pip install ipywidgets
 
     - name: Set up R
       uses: r-lib/actions/setup-r@v2
