@@ -39,34 +39,59 @@ Viel Erfolg!
 .dnd-box{min-height:2.4em;min-width:7em;margin:.2em .4em;
          border:2px dashed #aaa;display:inline-block}
 .dnd-box.ok{border-color:#0a0}
+#choices{border:2px dashed #aaa;padding:.3em .4em}
 </style>
 
-<p>Drag the <strong>prime numbers</strong> into the box:</p>
+<p>Drag the <strong>prime numbers</strong> into the box.<br>
+(You can drag them back out again.)</p>
 
-<div id="choices">
+<!-- DRAG SOURCE  ------------------------------------------------------->
+<div id="choices" class="dnd-box">
   <span class="dnd-item" draggable="true" data-key="2">2</span>
   <span class="dnd-item" draggable="true" data-key="4">4</span>
   <span class="dnd-item" draggable="true" data-key="5">5</span>
   <span class="dnd-item" draggable="true" data-key="9">9</span>
 </div>
 
+<!-- DROP TARGET  ------------------------------------------------------->
 <div id="target" class="dnd-box" data-answer="2,5"></div>
 <button onclick="checkDND()">Check me</button>
+<button onclick="resetDND()">Reset</button>
 
 <script>
-let drag;
-document.querySelectorAll('.dnd-item').forEach(el=>{
-  el.addEventListener('dragstart',e=>drag=el);
+let dragElem = null;
+
+/* ---------- make every .dnd-item draggable -------------------------- */
+document.querySelectorAll('.dnd-item').forEach(el =>
+  el.addEventListener('dragstart', e => dragElem = el)
+);
+
+/* ---------- allow drops on BOTH containers ------------------------- */
+['choices','target'].forEach(id => {
+  const area = document.getElementById(id);
+  area.addEventListener('dragover',  e => e.preventDefault());
+  area.addEventListener('drop',      e => { e.preventDefault(); area.appendChild(dragElem); });
 });
-const box=document.getElementById('target');
-box.addEventListener('dragover',e=>e.preventDefault());
-box.addEventListener('drop',e=>{e.preventDefault(); box.appendChild(drag);});
+
+/* ---------- grading ------------------------------------------------- */
 function checkDND(){
-  const picked=[...box.querySelectorAll('.dnd-item')]
-               .map(x=>x.dataset.key).sort().join();
-  const good  =box.dataset.answer.split(',').sort().join();
-  if(picked===good){alert('✅ Correct!');box.classList.add('ok');}
-  else             {alert('❌ Try again');box.classList.remove('ok');}
+  const picked = [...document.querySelectorAll('#target .dnd-item')]
+                  .map(x => x.dataset.key).sort().join();
+  const good   = document.getElementById('target').dataset.answer.split(',').sort().join();
+  if (picked === good){
+      alert('✅ Correct!');
+      document.getElementById('target').classList.add('ok');
+  } else {
+      alert('❌ Try again');
+      document.getElementById('target').classList.remove('ok');
+  }
+}
+
+/* ---------- reset --------------------------------------------------- */
+function resetDND(){
+  document.getElementById('target').querySelectorAll('.dnd-item')
+    .forEach(el => document.getElementById('choices').appendChild(el));
+  document.getElementById('target').classList.remove('ok');
 }
 </script>
 ```
