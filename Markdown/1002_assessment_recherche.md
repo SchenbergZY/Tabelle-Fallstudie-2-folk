@@ -225,51 +225,27 @@ function resetDND(){
 import ipywidgets as W
 from IPython.display import display
 
-# ── the four draggable tiles ─────────────────────────────
-nums  = [2, 4, 3, 9]
-tiles = [W.DraggableBox([W.Label(str(n))],     # child widgets
-                        draggable=True,
-                        data={'value': n},      # payload travels with the tile
-                        layout=W.Layout(width='40px', height='40px',
-                                         align_items='center',
-                                         justify_content='center',
-                                         border='1px solid #6366f1',
-                                         border_radius='6px'))     # 💅
-         for n in nums]
+wanted = ['2', '4', '3', '9']             # target order
 
-choices = W.HBox(tiles)
+tags = W.TagsInput(
+    value=['2', '3', '4', '9'],           # start scrambled
+    allowed_tags=['2','3','4','9'],        # limit to valid choices
+    allow_duplicates=False,
+    tag_style='info',                     # a bit of colour
+    layout=W.Layout(width='320px')
+)
 
-# ── the drop target  (one long empty bar) ────────────────
-target = W.DropBox(layout=W.Layout(border='2px dashed #bbb',
-                                   height='50px', width='320px',
-                                   align_items='center',
-                                   justify_content='flex-start',
-                                   padding='5px'))
-
-sequence = []                     # collects the order the user makes
-
-def handle_drop(change):
-    box      = change['owner']                # the DropBox
-    dropped  = change['new']['widget']        # the DraggableBox itself
-    payload  = change['new']['data']['value'] # 2 / 4 / 3 / 9
-    box.children += (dropped,)                # show the tile inside the bar
-    sequence.append(payload)
-
-target.observe(handle_drop, names='drop_event')
-
-# ── “Check” button ───────────────────────────────────────
 check  = W.Button(description='Check')
 out    = W.Output()
 
 def validate(_):
-    out.clear_output()
     with out:
-        print('Your order:', sequence)
-        print('✅ Correct!' if sequence == [2,4,3,9] else '❌ Try again')
+        out.clear_output()
+        print('Your order:', tags.value)
+        print('✅ Correct!') if list(tags.value)==wanted else print('❌ Try again')
 
 check.on_click(validate)
-
-display(W.VBox([choices, target, W.HBox([check, out])]))
+display(tags, check, out)
 ```
 
 ### Aufgabe 1
