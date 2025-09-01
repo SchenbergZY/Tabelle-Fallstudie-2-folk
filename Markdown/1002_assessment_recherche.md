@@ -294,6 +294,8 @@ function setupExercise(ex){
   });
 }
 </script>
+/* Wait until the DOM is fully parsed */
+document.addEventListener('DOMContentLoaded',setupAllDND);
 ```
 
 ```{raw} html
