@@ -221,7 +221,8 @@ function resetDND(){
 
 ### Aufgabe 0.2 Test Python ipywidgets
 
-```{code-cell} ipython3
+# ```{code-cell} ipython3
+```{} 
 import ipywidgets as W
 from IPython.display import display
 
@@ -259,7 +260,8 @@ Ihre Antwort sollte folgende Schritte umfassen:
 4. Erste Ergebnisbewertung 
 5. Verfeinerte Suchstrategien
 
-```{code-cell} ipython3
+#```{code-cell} ipython3
+```{} 
 :tags: [remove-input]
 import sys
 sys.path.append("../quadriga")
@@ -295,7 +297,8 @@ create_answer_box('Assessment-1')
 
 ### Aufgabe 2
 
-```{code-cell} ipython3
+# ```{code-cell} ipython3
+```{} 
 :tags: [remove-input]
 from jupyterquiz import display_quiz
 import sys
@@ -350,7 +353,8 @@ Analysieren Sie anhand des Beispiels von Lotte Reiniger (Dang/Junginger, 2024) d
 2. Rolle kontrollierter Vokabulare
 3. Historische Kontextualisierung
 
-```{code-cell} ipython3
+# ```{code-cell} ipython3
+```{} 
 :tags: [remove-input]
 import sys
 sys.path.append("../quadriga")
@@ -387,7 +391,8 @@ D. Definition der Suchbegriffe und Synonyme
 E. Eingrenzung des Grundkorpus (1985-1999)  
 F. Export der Metadaten  
 
-```{code-cell} ipython3
+# ```{code-cell} ipython3
+```{} 
 :tags: [remove-input]
 from jupyterquiz import display_quiz
 import sys
@@ -438,7 +443,8 @@ Vergleichen Sie die Herangehensweise dieser Fallstudie („Studentische Filme de
 2. Unterschiede in den Herausforderungen
 3. Anpassungen der Forschungsfragen
 
-```{code-cell} ipython3
+# ```{code-cell} ipython3
+```{} 
 :tags: [remove-input]
 import sys
 sys.path.append("../quadriga")
