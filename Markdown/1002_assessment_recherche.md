@@ -212,9 +212,7 @@ document.addEventListener('DOMContentLoaded',setupAllDND);
     <button class="dnd-btn reset">Reset</button>
   </div>
 </div>
-```
 
-```{raw} html
 <div class="dnd-exercise" data-answer="2,4,3,9" data-order="true">
 
   <div class="dnd-box choices">
