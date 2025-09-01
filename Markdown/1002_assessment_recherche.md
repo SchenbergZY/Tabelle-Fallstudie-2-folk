@@ -34,74 +34,64 @@ Viel Erfolg!
 
 ```{raw} html
 <style>
-:root{
-  --primary:   #4f46e5;   /* indigo-600  */
-  --primaryLt: #eef2ff;   /* indigo-50   */
-  --gray:      #9ca3af;   /* gray-400    */
-  --good:      #16a34a;   /* green-600   */
+/* ---------- layout wrapper ----------------------------------------- */
+.dnd-exercise{                     /* NEW */
+  display:flex; flex-direction:column;
+  align-items:flex-start;          /* left-align each row */
+  gap:1.2rem;                      /* space between the three rows */
 }
 
-/* draggable tiles (“chips”) */
+/* ---------- chips --------------------------------------------------- */
 .dnd-item{
-  background: var(--primaryLt);
-  border: 1px solid var(--primary);
-  border-radius: 0.5rem;
-  padding: 0.35rem 0.75rem;
-  margin: 0.25rem;
-  font-weight: 500;
-  box-shadow: 0 1px 2px rgba(0,0,0,.06);
-  cursor: move;
-  transition: transform .15s, box-shadow .15s;
+  background:#eef2ff; border:1px solid #4f46e5;
+  border-radius:.5rem; padding:.35rem .75rem; margin:.25rem;
+  font-weight:500; box-shadow:0 1px 2px rgba(0,0,0,.06);
+  cursor:move; transition:transform .15s, box-shadow .15s;
 }
-.dnd-item:active{              /* makes the tile ‘shrink’ while dragging */
-  transform: scale(.95);
-  box-shadow: 0 4px 6px rgba(0,0,0,.15);
-}
+.dnd-item:active{transform:scale(.95);box-shadow:0 4px 6px rgba(0,0,0,.15)}
 
-/* containers */
+/* ---------- containers (choices & target) --------------------------- */
 .dnd-box{
-  min-height: 3rem; min-width: 8rem;
-  padding: 0.5rem 0.6rem;
-  margin: 0.4rem 0.6rem 1rem 0;
-  border: 2px dashed var(--gray);
-  border-radius: 0.75rem;
-  display: inline-flex; flex-wrap: wrap; gap: .4rem; align-items: center;
-  transition: border-color .2s, background .2s;
+  min-height:3rem; min-width:8rem;
+  padding:.5rem .6rem; margin:0;
+  border:2px dashed #9ca3af; border-radius:.75rem;
+  display:flex; flex-wrap:wrap; gap:.4rem; align-items:center;
+  transition:border-color .2s, background .2s;
 }
-.dnd-box.dragover{             /* while user hovers with a tile */
-  background: #fefce8;         /* yellow-50 */
-  border-color: var(--primary);
-}
-.dnd-box.ok{                   /* after correct answer */
-  background: #f0fdf4;         /* green-50 */
-  border-color: var(--good);
-}
+.dnd-box.dragover{background:#fefce8;border-color:#4f46e5}
+.dnd-box.ok{background:#f0fdf4;border-color:#16a34a}
 
-/* buttons */
+/* ---------- buttons ------------------------------------------------- */
 .dnd-btn{
-  background: var(--primary); color:#fff;
-  border:0; border-radius:.5rem;
-  padding:.45rem 1.1rem; margin-right:.5rem;
-  font-weight:500; cursor:pointer;
-  transition: background .2s;
+  background:#4f46e5;color:#fff;
+  border:0;border-radius:.5rem;
+  padding:.45rem 1.1rem;margin-right:.6rem;
+  font-weight:500;cursor:pointer;transition:background .2s;
 }
-.dnd-btn:hover{ background:#4338ca }       /* indigo-700 */
+.dnd-btn:hover{background:#4338ca}
 </style>
 
-<p>Drag the <strong>prime numbers</strong> into the target box.<br>
-(You can drag them back out or press <em>Reset</em>.)</p>
+<!-- ░░░   EXERCISE   ░░░ -->
+<div class="dnd-exercise">             <!--  🚀  NEW wrapper  -->
 
-<div id="choices" class="dnd-box">
-  <span class="dnd-item" draggable="true" data-key="2">2</span>
-  <span class="dnd-item" draggable="true" data-key="4">4</span>
-  <span class="dnd-item" draggable="true" data-key="5">5</span>
-  <span class="dnd-item" draggable="true" data-key="9">9</span>
-</div>
+  <!-- Row 1 – choices -->
+  <div id="choices" class="dnd-box">
+    <span class="dnd-item" draggable="true" data-key="2">2</span>
+    <span class="dnd-item" draggable="true" data-key="9">9</span>
+    <span class="dnd-item" draggable="true" data-key="4">4</span>
+    <span class="dnd-item" draggable="true" data-key="5">5</span>
+  </div>
 
-<div id="target" class="dnd-box" data-answer="2,5"></div>
+  <!-- Row 2 – target -->
+  <div id="target" class="dnd-box" data-answer="2,5"></div>
 
-<button class="dnd-btn" onclick="checkDND()">Check me</button>
-<button class="dnd-btn" onclick="resetDND()">Reset</button>
+  <!-- Row 3 – buttons -->
+  <div>
+    <button class="dnd-btn" onclick="checkDND()">Check me</button>
+    <button class="dnd-btn" onclick="resetDND()">Reset</button>
+  </div>
+
+</div> <!-- /dnd-exercise -->
 
 <script>
 let dragElem=null;
