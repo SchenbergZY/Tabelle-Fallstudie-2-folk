@@ -206,9 +206,10 @@ function setupExercise(ex){
     target.classList.remove('ok');
   });
 }
-</script>
+
 /* Wait until the DOM is fully parsed */
 document.addEventListener('DOMContentLoaded',setupExercise);
+</script>
 ```
 
 ```{raw} html
