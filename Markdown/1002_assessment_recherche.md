@@ -155,60 +155,81 @@ function resetDND(){
 
 <!-- ░░░  UNIVERSAL SCRIPT (works for every .dnd-exercise)  ░░░ --------->
 <script>
-/* ----------------------------------------------------------------------
-   For EVERY .dnd-exercise block:
-     • makes its chips draggable
-     • allows drops in both the choices & target box
-     • grades according to its own data-answer and data-order attributes
-   -------------------------------------------------------------------- */
-document.querySelectorAll('.dnd-exercise').forEach(setupExercise);
 
-function setupExercise(ex){
-  const choices = ex.querySelector('.choices');
-  const target  = ex.querySelector('.target');
-  const answerArr     = ex.dataset.answer.split(',');
-  const orderMatters  = ex.dataset.order === 'true';
-  let dragElem = null;
+/* ============  UNIVERSAL SETUP FUNCTION (runs once)  ============== */
 
-  /* chips ------------------------------------------------------------ */
-  ex.querySelectorAll('.dnd-item').forEach(el =>
-    el.addEventListener('dragstart', () => dragElem = el)
-  );
+function setupAllDND(){                       // call exactly once, after page loads
 
-  /* drag-over helpers ------------------------------------------------ */
-  [choices, target].forEach(box => {
-    box.addEventListener('dragover', e => { e.preventDefault(); box.classList.add('dragover'); });
-    box.addEventListener('dragleave',   () => box.classList.remove('dragover'));
-    box.addEventListener('drop', e => {
-        e.preventDefault(); box.classList.remove('dragover');
-        box.appendChild(dragElem);
-    });
+  document.querySelectorAll('.dnd-exercise').forEach(ex=>{
+
+      const choices=ex.querySelector('.choices');
+
+      const target =ex.querySelector('.target');
+
+      const answer=ex.dataset.answer.split(',');
+
+      const ordered=(ex.dataset.order==='true');
+
+      let drag=null;
+
+
+
+      ex.querySelectorAll('.dnd-item').forEach(el=>
+
+        el.addEventListener('dragstart',()=>drag=el)
+
+      );
+
+
+
+      [choices,target].forEach(box=>{
+
+        box.addEventListener('dragover',e=>{e.preventDefault();box.classList.add('dragover')});
+
+        box.addEventListener('dragleave',()=>box.classList.remove('dragover'));
+
+        box.addEventListener('drop',e=>{
+
+            e.preventDefault();box.classList.remove('dragover');box.appendChild(drag);
+
+        });
+
+      });
+
+
+
+      ex.querySelector('.check').addEventListener('click',()=>{
+
+        const picked=[...target.querySelectorAll('.dnd-item')].map(x=>x.dataset.key);
+
+        const ok= ordered
+
+                ? picked.join()===answer.join()
+
+                : picked.sort().join()===answer.slice().sort().join();
+
+        if(ok){alert('✅ Correct!');target.classList.add('ok');}
+
+        else  {alert('❌ Try again'); target.classList.remove('ok');}
+
+      });
+
+
+
+      ex.querySelector('.reset').addEventListener('click',()=>{
+
+        target.querySelectorAll('.dnd-item').forEach(el=>choices.appendChild(el));
+
+        target.classList.remove('ok');
+
+      });
+
   });
 
-  /* check ------------------------------------------------------------ */
-  ex.querySelector('.check').addEventListener('click', () => {
-    const picked = [...target.querySelectorAll('.dnd-item')].map(x => x.dataset.key);
-    const correct = orderMatters
-          ? picked.join() === answerArr.join()                    // exact sequence
-          : picked.sort().join() === answerArr.slice().sort().join(); // set comparison
-    if (correct){
-      alert('✅ Correct!');
-      target.classList.add('ok');
-    } else {
-      alert('❌ Try again.');
-      target.classList.remove('ok');
-    }
-  });
-
-  /* reset ------------------------------------------------------------ */
-  ex.querySelector('.reset').addEventListener('click', () => {
-    target.querySelectorAll('.dnd-item').forEach(el => choices.appendChild(el));
-    target.classList.remove('ok');
-  });
 }
 
 /* Wait until the DOM is fully parsed */
-document.addEventListener('DOMContentLoaded',setupExercise);
+document.addEventListener('DOMContentLoaded',setupAllDND);
 </script>
 ```
 
