@@ -29,278 +29,70 @@ Es erfolgt keine Bewertung oder Speicherung Ihrer Ergebnisse. Nutzen Sie dieses 
 
 Viel Erfolg!
 ````
-
-### Aufgabe 0: Test html
-
-```{} 
-<style>
-/* ---------- layout wrapper ----------------------------------------- */
-.dnd-exercise{                     /* NEW */
-  display:flex; flex-direction:column;
-  align-items:flex-start;          /* left-align each row */
-  gap:1.2rem;                      /* space between the three rows */
-}
-
-/* ---------- chips --------------------------------------------------- */
-.dnd-item{
-  background:#eef2ff; border:1px solid #4f46e5;
-  border-radius:.5rem; padding:.35rem .75rem; margin:.25rem;
-  font-weight:500; box-shadow:0 1px 2px rgba(0,0,0,.06);
-  cursor:move; transition:transform .15s, box-shadow .15s;
-}
-.dnd-item:active{transform:scale(.95);box-shadow:0 4px 6px rgba(0,0,0,.15)}
-
-/* ---------- containers (choices & target) --------------------------- */
-.dnd-box{
-  min-height:3rem; min-width:8rem;
-  padding:.5rem .6rem; margin:0;
-  border:2px dashed #9ca3af; border-radius:.75rem;
-  display:flex; flex-wrap:wrap; gap:.4rem; align-items:center;
-  transition:border-color .2s, background .2s;
-}
-.dnd-box.dragover{background:#fefce8;border-color:#4f46e5}
-.dnd-box.ok{background:#f0fdf4;border-color:#16a34a}
-
-/* ---------- buttons ------------------------------------------------- */
-.dnd-btn{
-  background:#4f46e5;color:#fff;
-  border:0;border-radius:.5rem;
-  padding:.45rem 1.1rem;margin-right:.6rem;
-  font-weight:500;cursor:pointer;transition:background .2s;
-}
-.dnd-btn:hover{background:#4338ca}
-</style>
-
-<!-- ░░░   EXERCISE   ░░░ -->
-<div class="dnd-exercise">             <!--  🚀  NEW wrapper  -->
-
-  <!-- Row 1 – choices -->
-  <div id="choices" class="dnd-box">
-    <span class="dnd-item" draggable="true" data-key="2">2</span>
-    <span class="dnd-item" draggable="true" data-key="9">9</span>
-    <span class="dnd-item" draggable="true" data-key="4">4</span>
-    <span class="dnd-item" draggable="true" data-key="5">5</span>
-  </div>
-
-  <!-- Row 2 – target -->
-  <div id="target" class="dnd-box" data-answer="2,5"></div>
-
-  <!-- Row 3 – buttons -->
-  <div>
-    <button class="dnd-btn" onclick="checkDND()">Check me</button>
-    <button class="dnd-btn" onclick="resetDND()">Reset</button>
-  </div>
-
-</div> <!-- /dnd-exercise -->
-
-<script>
-let dragElem=null;
-
-/* make every chip draggable */
-document.querySelectorAll('.dnd-item').forEach(el=>
-  el.addEventListener('dragstart',   e=>dragElem=el)
-);
-
-/* helper to add “dragover” highlight */
-function makeDroppable(box){
-  box.addEventListener('dragover',e=>{
-      e.preventDefault(); box.classList.add('dragover');
-  });
-  box.addEventListener('dragleave',e=>{
-      box.classList.remove('dragover');
-  });
-  box.addEventListener('drop',e=>{
-      e.preventDefault(); box.classList.remove('dragover');
-      box.appendChild(dragElem);
-  });
-}
-['choices','target'].forEach(id=>makeDroppable(document.getElementById(id)));
-
-function checkDND(){
-  const picked=[...document.querySelectorAll('#target .dnd-item')]
-               .map(x=>x.dataset.key).sort().join();
-  const good  =document.getElementById('target')
-               .dataset.answer.split(',').sort().join();
-  const tgt=document.getElementById('target');
-  if(picked===good){ alert('✅ Correct!'); tgt.classList.add('ok'); }
-  else             { alert('❌ Try again'); tgt.classList.remove('ok'); }
-}
-function resetDND(){
-  document.getElementById('target').querySelectorAll('.dnd-item')
-          .forEach(el=>document.getElementById('choices').appendChild(el));
-  document.getElementById('target').classList.remove('ok');
-}
-</script>
-```
-
-### Aufgabe 0.1 Ranking test
-
-```{} 
-<!-- ░░░  STYLE & LAYOUT  ░░░  (unchanged – keep the colours you liked) -->
-<style>
-.dnd-exercise{display:flex;flex-direction:column;align-items:flex-start;gap:1.2rem}
-.dnd-item{background:#eef2ff;border:1px solid #4f46e5;border-radius:.5rem;
-          padding:.35rem .75rem;margin:.25rem;font-weight:500;cursor:move;
-          box-shadow:0 1px 2px rgba(0,0,0,.06);transition:transform .15s,box-shadow .15s}
-.dnd-item:active{transform:scale(.95);box-shadow:0 4px 6px rgba(0,0,0,.15)}
-.dnd-box{min-height:3rem;min-width:8rem;padding:.5rem .6rem;border:2px dashed #9ca3af;
-         border-radius:.75rem;display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;
-         transition:border-color .2s,background .2s}
-.dnd-box.dragover{background:#fefce8;border-color:#4f46e5}
-.dnd-box.ok{background:#f0fdf4;border-color:#16a34a}
-.dnd-btn{background:#4f46e5;color:#fff;border:0;border-radius:.5rem;
-         padding:.45rem 1.1rem;margin-right:.6rem;font-weight:500;cursor:pointer;
-         transition:background .2s}
-.dnd-btn:hover{background:#4338ca}
-</style>
-
-<!-- ░░░  EXERCISE  ░░░ -->
-<div class="dnd-exercise">
-
-  <!-- Row 1 – choices (unordered on purpose) -->
-  <div id="choices" class="dnd-box">
-    <span class="dnd-item" draggable="true" data-key="2">2</span>
-    <span class="dnd-item" draggable="true" data-key="9">9</span>
-    <span class="dnd-item" draggable="true" data-key="4">4</span>
-    <span class="dnd-item" draggable="true" data-key="3">3</span>
-  </div>
-
-  <!-- Row 2 – target;  data-answer is the exact sequence required -->
-  <div id="target" class="dnd-box" data-answer="2,4,3,9"></div>
-
-  <!-- Row 3 – buttons -->
-  <div>
-    <button class="dnd-btn" onclick="checkDND()">Check me</button>
-    <button class="dnd-btn" onclick="resetDND()">Reset</button>
-  </div>
-
-</div> <!-- /dnd-exercise -->
-
-<script>
-let dragElem=null;
-
-/* make every chip draggable */
-document.querySelectorAll('.dnd-item').forEach(el=>
-  el.addEventListener('dragstart',e=>dragElem=el)
-);
-
-/* allow drops on both containers + hover highlight */
-function makeDroppable(box){
-  box.addEventListener('dragover',e=>{e.preventDefault();box.classList.add('dragover')});
-  box.addEventListener('dragleave',e=>box.classList.remove('dragover'));
-  box.addEventListener('drop',e=>{
-      e.preventDefault();box.classList.remove('dragover');
-      box.appendChild(dragElem);
-  });
-}
-['choices','target'].forEach(id=>makeDroppable(document.getElementById(id)));
-
-/* ---------- grading – ORDER MATTERS now ---------------------------- */
-function checkDND(){
-  const picked=[...document.querySelectorAll('#target .dnd-item')]
-               .map(x=>x.dataset.key).join();          // no sort!
-  const good=document.getElementById('target').dataset.answer;
-  const tgt=document.getElementById('target');
-  if(picked===good){
-      alert('✅ Correct order!');
-      tgt.classList.add('ok');
-  }else{
-      alert('❌ Not quite – check the sequence.');
-      tgt.classList.remove('ok');
-  }
-}
-
-/* ---------- reset --------------------------------------------------- */
-function resetDND(){
-  document.getElementById('target').querySelectorAll('.dnd-item')
-          .forEach(el=>document.getElementById('choices').appendChild(el));
-  document.getElementById('target').classList.remove('ok');
-}
-</script>
-```
-
 ### Aufgabe 0.2 Together task
 
 ```{raw} html
-<!-- ░░░  ONE-OFF STYLES  ░░░ ------------------------------------------->
 <style>
+/* ============  DND STYLES (shared for THIS page only)  ============ */
 .dnd-exercise{display:flex;flex-direction:column;align-items:flex-start;gap:1.2rem;margin-bottom:2rem}
-.dnd-item{background:#eef2ff;border:1px solid #4f46e5;border-radius:.5rem;
-          padding:.35rem .75rem;margin:.25rem;font-weight:500;cursor:move;
-          box-shadow:0 1px 2px rgba(0,0,0,.06);transition:transform .15s,box-shadow .15s}
-.dnd-item:active{transform:scale(.95);box-shadow:0 4px 6px rgba(0,0,0,.15)}
-.dnd-box{min-height:3rem;min-width:8rem;padding:.5rem .6rem;border:2px dashed #9ca3af;
-         border-radius:.75rem;display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;
-         transition:border-color .2s,background .2s}
+.dnd-item   {background:#eef2ff;border:1px solid #4f46e5;border-radius:.55rem;
+             padding:.35rem .7rem;margin:.25rem;font-weight:500;cursor:move;
+             box-shadow:0 1px 2px rgb(0 0 0 / .06);transition:transform .15s,box-shadow .15s}
+.dnd-item:active{transform:scale(.94);box-shadow:0 4px 6px rgb(0 0 0 / .15)}
+.dnd-box    {min-height:3rem;min-width:8rem;padding:.5rem .6rem;border:2px dashed #9ca3af;
+             border-radius:.8rem;display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;
+             transition:border-color .2s,background .2s}
 .dnd-box.dragover{background:#fefce8;border-color:#4f46e5}
-.dnd-box.ok{background:#f0fdf4;border-color:#16a34a}
-.dnd-btn{background:#4f46e5;color:#fff;border:0;border-radius:.5rem;
-         padding:.45rem 1.1rem;margin-right:.6rem;font-weight:500;cursor:pointer;
-         transition:background .2s}
+.dnd-box.ok {background:#f0fdf4;border-color:#16a34a}
+.dnd-btn    {background:#4f46e5;color:#fff;border:0;border-radius:.55rem;
+             padding:.45rem 1.1rem;margin-right:.6rem;font-weight:500;cursor:pointer;
+             transition:background .2s}
 .dnd-btn:hover{background:#4338ca}
 </style>
 
-<!-- ░░░  UNIVERSAL SCRIPT (works for every .dnd-exercise)  ░░░ --------->
 <script>
-/* ----------------------------------------------------------------------
-   For EVERY .dnd-exercise block:
-     • makes its chips draggable
-     • allows drops in both the choices & target box
-     • grades according to its own data-answer and data-order attributes
-   -------------------------------------------------------------------- */
-document.querySelectorAll('.dnd-exercise').forEach(setupExercise);
+/* ============  UNIVERSAL SETUP FUNCTION (runs once)  ============== */
+function setupAllDND(){                       // call exactly once, after page loads
+  document.querySelectorAll('.dnd-exercise').forEach(ex=>{
+      const choices=ex.querySelector('.choices');
+      const target =ex.querySelector('.target');
+      const answer=ex.dataset.answer.split(',');
+      const ordered=(ex.dataset.order==='true');
+      let drag=null;
 
-function setupExercise(ex){
-  const choices = ex.querySelector('.choices');
-  const target  = ex.querySelector('.target');
-  const answerArr     = ex.dataset.answer.split(',');
-  const orderMatters  = ex.dataset.order === 'true';
-  let dragElem = null;
+      ex.querySelectorAll('.dnd-item').forEach(el=>
+        el.addEventListener('dragstart',()=>drag=el)
+      );
 
-  /* chips ------------------------------------------------------------ */
-  ex.querySelectorAll('.dnd-item').forEach(el =>
-    el.addEventListener('dragstart', () => dragElem = el)
-  );
+      [choices,target].forEach(box=>{
+        box.addEventListener('dragover',e=>{e.preventDefault();box.classList.add('dragover')});
+        box.addEventListener('dragleave',()=>box.classList.remove('dragover'));
+        box.addEventListener('drop',e=>{
+            e.preventDefault();box.classList.remove('dragover');box.appendChild(drag);
+        });
+      });
 
-  /* drag-over helpers ------------------------------------------------ */
-  [choices, target].forEach(box => {
-    box.addEventListener('dragover', e => { e.preventDefault(); box.classList.add('dragover'); });
-    box.addEventListener('dragleave',   () => box.classList.remove('dragover'));
-    box.addEventListener('drop', e => {
-        e.preventDefault(); box.classList.remove('dragover');
-        box.appendChild(dragElem);
-    });
-  });
+      ex.querySelector('.check').addEventListener('click',()=>{
+        const picked=[...target.querySelectorAll('.dnd-item')].map(x=>x.dataset.key);
+        const ok= ordered
+                ? picked.join()===answer.join()
+                : picked.sort().join()===answer.slice().sort().join();
+        if(ok){alert('✅ Correct!');target.classList.add('ok');}
+        else  {alert('❌ Try again'); target.classList.remove('ok');}
+      });
 
-  /* check ------------------------------------------------------------ */
-  ex.querySelector('.check').addEventListener('click', () => {
-    const picked = [...target.querySelectorAll('.dnd-item')].map(x => x.dataset.key);
-    const correct = orderMatters
-          ? picked.join() === answerArr.join()                    // exact sequence
-          : picked.sort().join() === answerArr.slice().sort().join(); // set comparison
-    if (correct){
-      alert('✅ Correct!');
-      target.classList.add('ok');
-    } else {
-      alert('❌ Try again.');
-      target.classList.remove('ok');
-    }
-  });
-
-  /* reset ------------------------------------------------------------ */
-  ex.querySelector('.reset').addEventListener('click', () => {
-    target.querySelectorAll('.dnd-item').forEach(el => choices.appendChild(el));
-    target.classList.remove('ok');
+      ex.querySelector('.reset').addEventListener('click',()=>{
+        target.querySelectorAll('.dnd-item').forEach(el=>choices.appendChild(el));
+        target.classList.remove('ok');
+      });
   });
 }
-</script>
 /* Wait until the DOM is fully parsed */
 document.addEventListener('DOMContentLoaded',setupAllDND);
+</script>
 ```
 
 ```{raw} html
-<!-- ░░░  TASK 1 — Pick the primes (order doesn’t matter)  ░░░ ----------->
-### Task 1 – Drag all *prime numbers* into the target box
 <div class="dnd-exercise" data-answer="2,5" data-order="false">
 
   <div class="dnd-box choices">
@@ -317,9 +109,9 @@ document.addEventListener('DOMContentLoaded',setupAllDND);
     <button class="dnd-btn reset">Reset</button>
   </div>
 </div>
+```
 
-<!-- ░░░  TASK 2 — Rank the numbers (order DOES matter)   ░░░ ----------->
-### Task 2 – Arrange the numbers in the order **2 → 4 → 3 → 9**
+```{raw} html
 <div class="dnd-exercise" data-answer="2,4,3,9" data-order="true">
 
   <div class="dnd-box choices">
