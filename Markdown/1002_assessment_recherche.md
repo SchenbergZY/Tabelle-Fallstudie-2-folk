@@ -32,7 +32,7 @@ Viel Erfolg!
 
 ### Aufgabe 0: Test html
 
-```{raw} html
+```{} 
 <style>
 /* ---------- layout wrapper ----------------------------------------- */
 .dnd-exercise{                     /* NEW */
