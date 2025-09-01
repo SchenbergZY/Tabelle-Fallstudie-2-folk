@@ -240,44 +240,6 @@ function resetDND(){
 .dnd-btn:hover{background:#4338ca}
 </style>
 
-<!-- ░░░  TASK 1 — Pick the primes (order doesn’t matter)  ░░░ ----------->
-### Task 1 – Drag all *prime numbers* into the target box
-<div class="dnd-exercise" data-answer="2,5" data-order="false">
-
-  <div class="dnd-box choices">
-    <span class="dnd-item" draggable="true" data-key="2">2</span>
-    <span class="dnd-item" draggable="true" data-key="9">9</span>
-    <span class="dnd-item" draggable="true" data-key="4">4</span>
-    <span class="dnd-item" draggable="true" data-key="5">5</span>
-  </div>
-
-  <div class="dnd-box target"></div>
-
-  <div>
-    <button class="dnd-btn check">Check me</button>
-    <button class="dnd-btn reset">Reset</button>
-  </div>
-</div>
-
-<!-- ░░░  TASK 2 — Rank the numbers (order DOES matter)   ░░░ ----------->
-### Task 2 – Arrange the numbers in the order **2 → 4 → 3 → 9**
-<div class="dnd-exercise" data-answer="2,4,3,9" data-order="true">
-
-  <div class="dnd-box choices">
-    <span class="dnd-item" draggable="true" data-key="9">9</span>
-    <span class="dnd-item" draggable="true" data-key="3">3</span>
-    <span class="dnd-item" draggable="true" data-key="4">4</span>
-    <span class="dnd-item" draggable="true" data-key="2">2</span>
-  </div>
-
-  <div class="dnd-box target"></div>
-
-  <div>
-    <button class="dnd-btn check">Check me</button>
-    <button class="dnd-btn reset">Reset</button>
-  </div>
-</div>
-
 <!-- ░░░  UNIVERSAL SCRIPT (works for every .dnd-exercise)  ░░░ --------->
 <script>
 /* ----------------------------------------------------------------------
@@ -332,6 +294,46 @@ function setupExercise(ex){
   });
 }
 </script>
+```
+
+```{raw} html
+<!-- ░░░  TASK 1 — Pick the primes (order doesn’t matter)  ░░░ ----------->
+### Task 1 – Drag all *prime numbers* into the target box
+<div class="dnd-exercise" data-answer="2,5" data-order="false">
+
+  <div class="dnd-box choices">
+    <span class="dnd-item" draggable="true" data-key="2">2</span>
+    <span class="dnd-item" draggable="true" data-key="9">9</span>
+    <span class="dnd-item" draggable="true" data-key="4">4</span>
+    <span class="dnd-item" draggable="true" data-key="5">5</span>
+  </div>
+
+  <div class="dnd-box target"></div>
+
+  <div>
+    <button class="dnd-btn check">Check me</button>
+    <button class="dnd-btn reset">Reset</button>
+  </div>
+</div>
+
+<!-- ░░░  TASK 2 — Rank the numbers (order DOES matter)   ░░░ ----------->
+### Task 2 – Arrange the numbers in the order **2 → 4 → 3 → 9**
+<div class="dnd-exercise" data-answer="2,4,3,9" data-order="true">
+
+  <div class="dnd-box choices">
+    <span class="dnd-item" draggable="true" data-key="9">9</span>
+    <span class="dnd-item" draggable="true" data-key="3">3</span>
+    <span class="dnd-item" draggable="true" data-key="4">4</span>
+    <span class="dnd-item" draggable="true" data-key="2">2</span>
+  </div>
+
+  <div class="dnd-box target"></div>
+
+  <div>
+    <button class="dnd-btn check">Check me</button>
+    <button class="dnd-btn reset">Reset</button>
+  </div>
+</div>
 ```
 
 ### Aufgabe 0.3 Test Python ipywidgets
@@ -565,6 +567,27 @@ sys.path.append("../quadriga")
 from assessment import create_answer_box
 
 create_answer_box('Assessment_C-5')
+```
+
+```{raw} html
+<!-- ░░░  TASK 3 — Rank the numbers (order DOES matter)   ░░░ ----------->
+### Task 3 – Arrange the numbers in the order **2 → 9 → 4 → 3**
+<div class="dnd-exercise" data-answer="2,9,4,3" data-order="true">
+
+  <div class="dnd-box choices">
+    <span class="dnd-item" draggable="true" data-key="9">9</span>
+    <span class="dnd-item" draggable="true" data-key="3">3</span>
+    <span class="dnd-item" draggable="true" data-key="4">4</span>
+    <span class="dnd-item" draggable="true" data-key="2">2</span>
+  </div>
+
+  <div class="dnd-box target"></div>
+
+  <div>
+    <button class="dnd-btn check">Check me</button>
+    <button class="dnd-btn reset">Reset</button>
+  </div>
+</div>
 ```
 
 ````{admonition} Musterlösung
