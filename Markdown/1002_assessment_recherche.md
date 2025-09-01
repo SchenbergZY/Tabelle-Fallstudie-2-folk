@@ -221,8 +221,7 @@ function resetDND(){
 
 ### Aufgabe 0.2 Test Python ipywidgets
 
-# ```{code-cell} ipython3
-```{} 
+```{code-cell} ipython3
 import ipywidgets as W
 from IPython.display import display
 
