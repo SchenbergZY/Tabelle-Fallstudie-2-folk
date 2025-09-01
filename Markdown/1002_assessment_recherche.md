@@ -135,7 +135,7 @@ function resetDND(){
 
 ### Aufgabe 0.1 Ranking test
 
-```{raw} html
+```{} 
 <!-- ░░░  STYLE & LAYOUT  ░░░  (unchanged – keep the colours you liked) -->
 <style>
 .dnd-exercise{display:flex;flex-direction:column;align-items:flex-start;gap:1.2rem}
@@ -219,9 +219,124 @@ function resetDND(){
 </script>
 ```
 
-### Aufgabe 0.2 Test Python ipywidgets
+### Aufgabe 0.2 Together task
 
-```{code-cell} ipython3
+```{raw} html
+<!-- ░░░  ONE-OFF STYLES  ░░░ ------------------------------------------->
+<style>
+.dnd-exercise{display:flex;flex-direction:column;align-items:flex-start;gap:1.2rem;margin-bottom:2rem}
+.dnd-item{background:#eef2ff;border:1px solid #4f46e5;border-radius:.5rem;
+          padding:.35rem .75rem;margin:.25rem;font-weight:500;cursor:move;
+          box-shadow:0 1px 2px rgba(0,0,0,.06);transition:transform .15s,box-shadow .15s}
+.dnd-item:active{transform:scale(.95);box-shadow:0 4px 6px rgba(0,0,0,.15)}
+.dnd-box{min-height:3rem;min-width:8rem;padding:.5rem .6rem;border:2px dashed #9ca3af;
+         border-radius:.75rem;display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;
+         transition:border-color .2s,background .2s}
+.dnd-box.dragover{background:#fefce8;border-color:#4f46e5}
+.dnd-box.ok{background:#f0fdf4;border-color:#16a34a}
+.dnd-btn{background:#4f46e5;color:#fff;border:0;border-radius:.5rem;
+         padding:.45rem 1.1rem;margin-right:.6rem;font-weight:500;cursor:pointer;
+         transition:background .2s}
+.dnd-btn:hover{background:#4338ca}
+</style>
+
+<!-- ░░░  TASK 1 — Pick the primes (order doesn’t matter)  ░░░ ----------->
+### Task 1 – Drag all *prime numbers* into the target box
+<div class="dnd-exercise" data-answer="2,5" data-order="false">
+
+  <div class="dnd-box choices">
+    <span class="dnd-item" draggable="true" data-key="2">2</span>
+    <span class="dnd-item" draggable="true" data-key="9">9</span>
+    <span class="dnd-item" draggable="true" data-key="4">4</span>
+    <span class="dnd-item" draggable="true" data-key="5">5</span>
+  </div>
+
+  <div class="dnd-box target"></div>
+
+  <div>
+    <button class="dnd-btn check">Check me</button>
+    <button class="dnd-btn reset">Reset</button>
+  </div>
+</div>
+
+<!-- ░░░  TASK 2 — Rank the numbers (order DOES matter)   ░░░ ----------->
+### Task 2 – Arrange the numbers in the order **2 → 4 → 3 → 9**
+<div class="dnd-exercise" data-answer="2,4,3,9" data-order="true">
+
+  <div class="dnd-box choices">
+    <span class="dnd-item" draggable="true" data-key="9">9</span>
+    <span class="dnd-item" draggable="true" data-key="3">3</span>
+    <span class="dnd-item" draggable="true" data-key="4">4</span>
+    <span class="dnd-item" draggable="true" data-key="2">2</span>
+  </div>
+
+  <div class="dnd-box target"></div>
+
+  <div>
+    <button class="dnd-btn check">Check me</button>
+    <button class="dnd-btn reset">Reset</button>
+  </div>
+</div>
+
+<!-- ░░░  UNIVERSAL SCRIPT (works for every .dnd-exercise)  ░░░ --------->
+<script>
+/* ----------------------------------------------------------------------
+   For EVERY .dnd-exercise block:
+     • makes its chips draggable
+     • allows drops in both the choices & target box
+     • grades according to its own data-answer and data-order attributes
+   -------------------------------------------------------------------- */
+document.querySelectorAll('.dnd-exercise').forEach(setupExercise);
+
+function setupExercise(ex){
+  const choices = ex.querySelector('.choices');
+  const target  = ex.querySelector('.target');
+  const answerArr     = ex.dataset.answer.split(',');
+  const orderMatters  = ex.dataset.order === 'true';
+  let dragElem = null;
+
+  /* chips ------------------------------------------------------------ */
+  ex.querySelectorAll('.dnd-item').forEach(el =>
+    el.addEventListener('dragstart', () => dragElem = el)
+  );
+
+  /* drag-over helpers ------------------------------------------------ */
+  [choices, target].forEach(box => {
+    box.addEventListener('dragover', e => { e.preventDefault(); box.classList.add('dragover'); });
+    box.addEventListener('dragleave',   () => box.classList.remove('dragover'));
+    box.addEventListener('drop', e => {
+        e.preventDefault(); box.classList.remove('dragover');
+        box.appendChild(dragElem);
+    });
+  });
+
+  /* check ------------------------------------------------------------ */
+  ex.querySelector('.check').addEventListener('click', () => {
+    const picked = [...target.querySelectorAll('.dnd-item')].map(x => x.dataset.key);
+    const correct = orderMatters
+          ? picked.join() === answerArr.join()                    // exact sequence
+          : picked.sort().join() === answerArr.slice().sort().join(); // set comparison
+    if (correct){
+      alert('✅ Correct!');
+      target.classList.add('ok');
+    } else {
+      alert('❌ Try again.');
+      target.classList.remove('ok');
+    }
+  });
+
+  /* reset ------------------------------------------------------------ */
+  ex.querySelector('.reset').addEventListener('click', () => {
+    target.querySelectorAll('.dnd-item').forEach(el => choices.appendChild(el));
+    target.classList.remove('ok');
+  });
+}
+</script>
+```
+
+### Aufgabe 0.3 Test Python ipywidgets
+
+```{} 
 import ipywidgets as W
 from IPython.display import display
 
