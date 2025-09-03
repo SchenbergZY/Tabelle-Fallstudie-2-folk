@@ -29,108 +29,6 @@ Es erfolgt keine Bewertung oder Speicherung Ihrer Ergebnisse. Nutzen Sie dieses 
 
 Viel Erfolg!
 ````
-### Aufgabe 0 test html
-
-```{}
-<style>
-/* ---------- layout wrapper ----------------------------------------- */
-.dnd-exercise{                     /* NEW */
-  display:flex; flex-direction:column;
-  align-items:flex-start;          /* left-align each row */
-  gap:1.2rem;                      /* space between the three rows */
-}
-
-/* ---------- chips --------------------------------------------------- */
-.dnd-item{
-  background:#eef2ff; border:1px solid #4f46e5;
-  border-radius:.5rem; padding:.35rem .75rem; margin:.25rem;
-  font-weight:500; box-shadow:0 1px 2px rgba(0,0,0,.06);
-  cursor:move; transition:transform .15s, box-shadow .15s;
-}
-.dnd-item:active{transform:scale(.95);box-shadow:0 4px 6px rgba(0,0,0,.15)}
-
-/* ---------- containers (choices & target) --------------------------- */
-.dnd-box{
-  min-height:3rem; min-width:8rem;
-  padding:.5rem .6rem; margin:0;
-  border:2px dashed #9ca3af; border-radius:.75rem;
-  display:flex; flex-wrap:wrap; gap:.4rem; align-items:center;
-  transition:border-color .2s, background .2s;
-}
-.dnd-box.dragover{background:#fefce8;border-color:#4f46e5}
-.dnd-box.ok{background:#f0fdf4;border-color:#16a34a}
-
-/* ---------- buttons ------------------------------------------------- */
-.dnd-btn{
-  background:#4f46e5;color:#fff;
-  border:0;border-radius:.5rem;
-  padding:.45rem 1.1rem;margin-right:.6rem;
-  font-weight:500;cursor:pointer;transition:background .2s;
-}
-.dnd-btn:hover{background:#4338ca}
-</style>
-
-<!-- ░░░   EXERCISE   ░░░ -->
-<div class="dnd-exercise">             <!--  🚀  NEW wrapper  -->
-
-  <!-- Row 1 – choices -->
-  <div id="choices" class="dnd-box">
-    <span class="dnd-item" draggable="true" data-key="2">2</span>
-    <span class="dnd-item" draggable="true" data-key="9">9</span>
-    <span class="dnd-item" draggable="true" data-key="4">4</span>
-    <span class="dnd-item" draggable="true" data-key="5">5</span>
-  </div>
-
-  <!-- Row 2 – target -->
-  <div id="target" class="dnd-box" data-answer="2,5"></div>
-
-  <!-- Row 3 – buttons -->
-  <div>
-    <button class="dnd-btn" onclick="checkDND()">Check me</button>
-    <button class="dnd-btn" onclick="resetDND()">Reset</button>
-  </div>
-
-</div> <!-- /dnd-exercise -->
-
-<script>
-let dragElem=null;
-
-/* make every chip draggable */
-document.querySelectorAll('.dnd-item').forEach(el=>
-  el.addEventListener('dragstart',   e=>dragElem=el)
-);
-
-/* helper to add “dragover” highlight */
-function makeDroppable(box){
-  box.addEventListener('dragover',e=>{
-      e.preventDefault(); box.classList.add('dragover');
-  });
-  box.addEventListener('dragleave',e=>{
-      box.classList.remove('dragover');
-  });
-  box.addEventListener('drop',e=>{
-      e.preventDefault(); box.classList.remove('dragover');
-      box.appendChild(dragElem);
-  });
-}
-['choices','target'].forEach(id=>makeDroppable(document.getElementById(id)));
-
-function checkDND(){
-  const picked=[...document.querySelectorAll('#target .dnd-item')]
-               .map(x=>x.dataset.key).sort().join();
-  const good  =document.getElementById('target')
-               .dataset.answer.split(',').sort().join();
-  const tgt=document.getElementById('target');
-  if(picked===good){ alert('✅ Correct!'); tgt.classList.add('ok'); }
-  else             { alert('❌ Try again'); tgt.classList.remove('ok'); }
-}
-function resetDND(){
-  document.getElementById('target').querySelectorAll('.dnd-item')
-          .forEach(el=>document.getElementById('choices').appendChild(el));
-  document.getElementById('target').classList.remove('ok');
-}
-</script>
-```
 
 ### Aufgabe 0.2 Together task
 
@@ -230,7 +128,36 @@ function setupAllDND(){                       // call exactly once, after page l
 
 /* Wait until the DOM is fully parsed */
 document.addEventListener('DOMContentLoaded',setupAllDND);
+
+/* ── NEW: make any .dnd-box.vertical a column ──────────────────────── */
+.dnd-box.vertical          { flex-direction: column; gap: .6rem; }
+.dnd-box.vertical .dnd-item{ width: 100%; }          /* fill the row   */
 </script>
+```
+
+```{raw} html
+<div class="dnd-exercise" data-answer="A,C" data-order="false">
+
+  <!--  ▼  add .vertical next to .choices  -->
+  <div class="dnd-box choices vertical">
+    <span class="dnd-item" draggable="true" data-key="A">
+      Statement A – a fairly long chunk of text that should wrap nicely.
+    </span>
+    <span class="dnd-item" draggable="true" data-key="B">
+      Statement B – another verbose option that looks better on its own line.
+    </span>
+    <span class="dnd-item" draggable="true" data-key="C">
+      Statement C – etc.
+    </span>
+  </div>
+
+  <div class="dnd-box target"></div>
+
+  <div>
+    <button class="dnd-btn check">Check me</button>
+    <button class="dnd-btn reset">Reset</button>
+  </div>
+</div>
 ```
 
 ```{raw} html
