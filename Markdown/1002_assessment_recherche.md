@@ -49,6 +49,10 @@ Viel Erfolg!
          padding:.45rem 1.1rem;margin-right:.6rem;font-weight:500;cursor:pointer;
          transition:background .2s}
 .dnd-btn:hover{background:#4338ca}
+
+/* ── NEW: make any .dnd-box.vertical a column ──────────────────────── */
+.dnd-box.vertical          { flex-direction: column; gap: .6rem; }
+.dnd-box.vertical .dnd-item{ width: 100%; }          /* fill the row   */
 </style>
 
 <!-- ░░░  UNIVERSAL SCRIPT (works for every .dnd-exercise)  ░░░ --------->
@@ -128,10 +132,6 @@ function setupAllDND(){                       // call exactly once, after page l
 
 /* Wait until the DOM is fully parsed */
 document.addEventListener('DOMContentLoaded',setupAllDND);
-
-/* ── NEW: make any .dnd-box.vertical a column ──────────────────────── */
-.dnd-box.vertical          { flex-direction: column; gap: .6rem; }
-.dnd-box.vertical .dnd-item{ width: 100%; }          /* fill the row   */
 </script>
 ```
 
