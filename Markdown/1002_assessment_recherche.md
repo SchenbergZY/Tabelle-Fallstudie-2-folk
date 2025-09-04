@@ -51,8 +51,13 @@ Viel Erfolg!
 .dnd-btn:hover{background:#4338ca}
 
 /* ── NEW: make any .dnd-box.vertical a column ──────────────────────── */
+/*   Make any choices container that's marked .vertical stack      */
+/*   its items top–to–bottom AND stretch each chip the full width  */
 .dnd-box.vertical          { flex-direction: column; gap: .6rem; }
-.dnd-box.vertical .dnd-item{ width: 100%; }          /* fill the row   */
+.dnd-box.vertical .dnd-item{
+  display: block;          /* forces line break after every chip  */
+  width: 100%;             /* chip fills the entire container row */
+}
 </style>
 
 <!-- ░░░  UNIVERSAL SCRIPT (works for every .dnd-exercise)  ░░░ --------->
