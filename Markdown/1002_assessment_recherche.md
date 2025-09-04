@@ -159,6 +159,30 @@ document.addEventListener('DOMContentLoaded',setupAllDND);
   </div>
 </div>
 ```
+```{raw} html
+<div class="dnd-exercise" data-answer="A,C" data-order="true">
+
+  <!--  ▼  add .vertical next to .choices  -->
+  <div class="dnd-box choices vertical">
+    <span class="dnd-item" draggable="true" data-key="A">
+      Statement A – a fairly long chunk of text that should wrap nicely.
+    </span>
+    <span class="dnd-item" draggable="true" data-key="B">
+      Statement B – another verbose option that looks better on its own line.
+    </span>
+    <span class="dnd-item" draggable="true" data-key="C">
+      Statement C – etc.
+    </span>
+  </div>
+
+  <div class="dnd-box target"></div>
+
+  <div>
+    <button class="dnd-btn check">Check me</button>
+    <button class="dnd-btn reset">Reset</button>
+  </div>
+</div>
+```
 
 ```{raw} html
 <div class="dnd-exercise" data-answer="2,5" data-order="false">
