@@ -117,7 +117,12 @@ function setupAllDND(){                       // call exactly once, after page l
 
         if(ok){alert('✅ Correct!');target.classList.add('ok');}
 
-        else  {alert('❌ Try again'); target.classList.remove('ok');}
+        else  {alert('❌ Try again');
+            target.classList.remove('ok');
+            /* NEW: send everything back to the choices box */
+            target.querySelectorAll('.dnd-item')
+                  .forEach(el => choices.appendChild(el));
+        }
 
       });
 
